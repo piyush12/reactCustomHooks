@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
-import useDebounce from "./hooks/useDebounce";
+import useThrottle from "./hooks/useThrottle";
 import "./styles.css";
 
 export default function App() {
   const [value, setValue] = useState("");
-  const debouncedValue = useDebounce(value, 1000);
+  const throttledValue = useThrottle(value, 500);
 
   const handleChange = (event) => {
     setValue(event.target.value);
   };
 
   useEffect(() => {
-    console.log("debouncedValue", debouncedValue);
-  }, [debouncedValue]);
+    console.log("throttledValue", throttledValue);
+  }, [throttledValue]);
 
   return (
     <div className="App">
