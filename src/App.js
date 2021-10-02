@@ -4,15 +4,16 @@ import "./styles.css";
 
 export default function App() {
   const [value, setValue] = useState("");
-  const throttledValue = useThrottle(value, 500);
+  const [throtlledvalue, throttledEventHandle] = useThrottle(value, 1500);
 
   const handleChange = (event) => {
     setValue(event.target.value);
+    throttledEventHandle(event.target.value);
   };
 
   useEffect(() => {
-    console.log("throttledValue", throttledValue);
-  }, [throttledValue]);
+    console.log("throttledValue", throtlledvalue);
+  }, [throtlledvalue]);
 
   return (
     <div className="App">

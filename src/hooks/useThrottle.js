@@ -1,27 +1,28 @@
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 
 function useThrottle(value, delay) {
   const [throtlledvalue, setThrottledValue] = useState(value);
 
-  useEffect(() => {
-    const timer = setInterval(() => setThrottledValue(value), delay);
+  const throttledEventHandle = useMemo(
+    () => throttle(setThrottledValue, delay),
+    [delay]
+  );
 
-    return () => clearInterval(timer);
-  }, [value, delay]);
-
-  return throtlledvalue;
+  return [throtlledvalue, throttledEventHandle];
 }
 
 export default useThrottle;
 
-function throttle(fn, delay) {
+export function throttle(fn, delay) {
   let timer;
-
   return function (...args) {
-    timer = setInterval(() => fn(...args), delay);
-
-    if (timer) {
-      clearInterval(timer);
+    let context = this;
+    if (!timer) {
+      fn.apply(context, args);
+      timer = true;
+      setTimeout(() => {
+        timer = false;
+      }, delay);
     }
   };
 }
