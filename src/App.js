@@ -1,15 +1,18 @@
-import { useEffect, useState } from "react";
-import useIsMounted from "./hooks/useIsMounted";
+import { useEffect } from "react";
+import useAsync from "./hooks/useAsync";
 import "./styles.css";
 
+const asyncData = () =>
+  new Promise((resolve, reject) => {
+    return resolve("success");
+  });
+
 export default function App() {
-  const isMounted = useIsMounted();
+  const { status, data, run } = useAsync();
 
   useEffect(() => {
-    if (isMounted) {
-      console.log("Mounted");
-    }
-  }, [isMounted]);
+    run(asyncData);
+  }, [run]);
 
   return (
     <div className="App">
