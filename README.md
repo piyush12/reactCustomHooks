@@ -69,3 +69,11 @@ export default function App() {
   const [state, unSafeDispatch] = useReducer(reducer, initialState);
   const dispatch = useSafeDispatch(unSafeDispatch);
 ```
+
+# useFetch
+
+```
+  const { status, data, error } = useFetch(
+    "https://jsonplaceholder.typicode.com/todos/1"
+  );
+```

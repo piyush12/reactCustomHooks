@@ -1,18 +1,11 @@
 import { useEffect } from "react";
-import useAsync from "./hooks/useAsync";
+import useFetch from "./hooks/useFetch";
 import "./styles.css";
 
-const asyncData = () =>
-  new Promise((resolve, reject) => {
-    return resolve("success");
-  });
-
 export default function App() {
-  const { status, data, run } = useAsync();
-
-  useEffect(() => {
-    run(asyncData);
-  }, [run]);
+  const { status, data, error } = useFetch(
+    "https://jsonplaceholder.typicode.com/todos/1"
+  );
 
   return (
     <div className="App">
