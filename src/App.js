@@ -1,16 +1,14 @@
-import { useEffect } from "react";
-import useFetch from "./hooks/useFetch";
+import useToggle from "./hooks/useToggle";
 import "./styles.css";
 
 export default function App() {
-  const { status, data, error } = useFetch(
-    "https://jsonplaceholder.typicode.com/todos/1"
-  );
+  const { isToggle, toggle } = useToggle();
 
   return (
     <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
+      <h1>Custom Hooks</h1>
+      {isToggle && "Show"}
+      <button onClick={toggle}>Toggle</button>
     </div>
   );
 }
