@@ -1,14 +1,23 @@
-import useToggle from "./hooks/useToggle";
+import { useRef } from "react";
+import useClickOutside from "./hooks/useClickOutside";
 import "./styles.css";
 
 export default function App() {
-  const { isToggle, toggle } = useToggle();
+  const ref = useRef();
+  const clickOutside = () => {
+    console.log("clickOutside");
+  };
+  useClickOutside(ref, clickOutside);
+  const clickedInside = () => {
+    console.log("clicked button");
+  };
 
   return (
     <div className="App">
       <h1>Custom Hooks</h1>
-      {isToggle && "Show"}
-      <button onClick={toggle}>Toggle</button>
+      <button ref={ref} onClick={clickedInside}>
+        Toggle
+      </button>
     </div>
   );
 }
