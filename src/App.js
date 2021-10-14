@@ -1,21 +1,31 @@
-import { useRef, useState } from "react";
-import usePrevious from "./hooks/usePrevious";
+import React from "react";
+import useLocalStorage from "./hooks/useLocalstorage";
 import "./styles.css";
 
 export default function App() {
-  const [value, setValue] = useState(0);
-  const previousValue = usePrevious(value);
+  const { value, addValueToStorage, removeValueFromStorage } = useLocalStorage(
+    "user"
+  );
 
-  const handleIncrement = () => {
-    setValue((v) => v + 1);
+  const handleChange = (e) => {
+    const value = e.target.value;
+    addValueToStorage({ user: value });
+  };
+
+  const removeItem = () => {
+    removeValueFromStorage("user");
   };
 
   return (
     <div className="App">
       <h1>Custom Hooks</h1>
-      <p>{value}</p>
-      <p>previousValue : {previousValue} </p>
-      <button onClick={handleIncrement}>Increment</button>
+      <p>{JSON.stringify(value)}</p>
+      <p>
+        <input type="text" onChange={handleChange} />
+      </p>
+      <p>
+        <button onClick={removeItem}>Remove</button>
+      </p>
     </div>
   );
 }
