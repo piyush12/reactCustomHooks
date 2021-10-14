@@ -1,23 +1,21 @@
-import { useRef } from "react";
-import useClickOutside from "./hooks/useClickOutside";
+import { useRef, useState } from "react";
+import usePrevious from "./hooks/usePrevious";
 import "./styles.css";
 
 export default function App() {
-  const ref = useRef();
-  const clickOutside = () => {
-    console.log("clickOutside");
-  };
-  useClickOutside(ref, clickOutside);
-  const clickedInside = () => {
-    console.log("clicked button");
+  const [value, setValue] = useState(0);
+  const previousValue = usePrevious(value);
+
+  const handleIncrement = () => {
+    setValue((v) => v + 1);
   };
 
   return (
     <div className="App">
       <h1>Custom Hooks</h1>
-      <button ref={ref} onClick={clickedInside}>
-        Toggle
-      </button>
+      <p>{value}</p>
+      <p>previousValue : {previousValue} </p>
+      <button onClick={handleIncrement}>Increment</button>
     </div>
   );
 }
