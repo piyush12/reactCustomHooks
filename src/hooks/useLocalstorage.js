@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 function useLocalStorage(key, initialValue) {
   const [value, setValue] = useState(() => {
@@ -7,7 +7,7 @@ function useLocalStorage(key, initialValue) {
     return parseValue;
   });
 
-  const addValueToStorage = (val) => {
+  const addValueToStorage = useCallback((val) => {
     try {
       const stringfyValue = JSON.stringify(val);
       localStorage.setItem(key, stringfyValue);
@@ -15,12 +15,12 @@ function useLocalStorage(key, initialValue) {
     } catch (e) {
       throw new Error("Error", e);
     }
-  };
+  }, []);
 
-  const removeValueFromStorage = () => {
+  const removeValueFromStorage = useCallback(() => {
     localStorage.removeItem(key);
     setValue(null);
-  };
+  }, []);
 
   return { value, addValueToStorage, removeValueFromStorage };
 }

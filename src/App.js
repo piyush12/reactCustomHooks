@@ -1,31 +1,29 @@
-import React from "react";
-import useLocalStorage from "./hooks/useLocalstorage";
+import React, { Fragment } from "react";
+import { useMap } from "./hooks/useMap";
 import "./styles.css";
 
 export default function App() {
-  const { value, addValueToStorage, removeValueFromStorage } = useLocalStorage(
-    "user"
-  );
+  const initialValues = [["key", "🆕"]];
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    addValueToStorage({ user: value });
-  };
+  const [map, actions] = useMap(initialValues);
 
-  const removeItem = () => {
-    removeValueFromStorage("user");
-  };
+  const set = () => actions.set("hello", "33");
+  const reset = () => actions.reset();
+  const remove = () => actions.remove("hello");
 
   return (
     <div className="App">
-      <h1>Custom Hooks</h1>
-      <p>{JSON.stringify(value)}</p>
-      <p>
-        <input type="text" onChange={handleChange} />
-      </p>
-      <p>
-        <button onClick={removeItem}>Remove</button>
-      </p>
+      <button onClick={set}>Add</button>
+      <button onClick={reset}>Reset</button>
+      <button onClick={remove}>{'Remove "hello"'}</button>
+
+      <pre>
+        Map (
+        {Array.from(map.entries()).map(([key, value]) => (
+          <Fragment key={key}>{`\n  ${key}: ${value}`}</Fragment>
+        ))}
+        <br />)
+      </pre>
     </div>
   );
 }
