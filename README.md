@@ -197,3 +197,14 @@ return (
     </pre>
   </div>
 ```
+
+# useGeoLocation
+
+```
+const { position, getLocation } = useGeoLocation();
+
+  useEffect(() => {
+    getLocation();
+  }, []);
+
+```
