@@ -1,29 +1,22 @@
-import React, { Fragment } from "react";
-import { useMap } from "./hooks/useMap";
+import React from "react";
+import useCopyToClipboard from "./hooks/useCopyToClipboard";
 import "./styles.css";
 
 export default function App() {
-  const initialValues = [["key", "🆕"]];
-
-  const [map, actions] = useMap(initialValues);
-
-  const set = () => actions.set("hello", "33");
-  const reset = () => actions.reset();
-  const remove = () => actions.remove("hello");
+  const [text, setText] = React.useState("");
+  const [value, error, copyToClipboard] = useCopyToClipboard();
 
   return (
     <div className="App">
-      <button onClick={set}>Add</button>
-      <button onClick={reset}>Reset</button>
-      <button onClick={remove}>{'Remove "hello"'}</button>
+      <div>
+        <input value={text} onChange={(e) => setText(e.target.value)} />
+        <button type="button" onClick={() => copyToClipboard(text)}>
+          copy text
+        </button>
 
-      <pre>
-        Map (
-        {Array.from(map.entries()).map(([key, value]) => (
-          <Fragment key={key}>{`\n  ${key}: ${value}`}</Fragment>
-        ))}
-        <br />)
-      </pre>
+        {error && <p>Unable to copy value: {error}</p>}
+        {value && <p>Copied </p>}
+      </div>
     </div>
   );
 }

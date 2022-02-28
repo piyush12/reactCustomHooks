@@ -3,7 +3,7 @@
 # useThrottle
 
 ```
-  const [value, setValue] = useState("");
+const [value, setValue] = useState("");
 const [throtlledvalue, throttledEventHandle] = useThrottle(value, 1500);
 
 const handleChange = (event) => {
@@ -206,5 +206,28 @@ const { position, getLocation } = useGeoLocation();
   useEffect(() => {
     getLocation();
   }, []);
+
+```
+
+# useCopyToClipboard
+
+```
+
+  const [text, setText] = React.useState("");
+  const [value, error, copyToClipboard] = useCopyToClipboard();
+
+  return (
+    <div className="App">
+      <div>
+        <input value={text} onChange={(e) => setText(e.target.value)} />
+        <button type="button" onClick={() => copyToClipboard(text)}>
+          copy text
+        </button>
+
+        {error && <p>Unable to copy value: {error}</p>}
+        {value && <p>Copied </p>}
+      </div>
+    </div>
+  );
 
 ```
