@@ -1,22 +1,18 @@
 import React from "react";
-import useCopyToClipboard from "./hooks/useCopyToClipboard";
+import useDateArray from "./hooks/useDateArray";
 import "./styles.css";
 
 export default function App() {
-  const [text, setText] = React.useState("");
-  const [value, error, copyToClipboard] = useCopyToClipboard();
+  const now = new Date();
+  const [currentMonth, setCurrentMonth] = React.useState(now.getMonth());
+  const [currentYear, setCurrentYear] = React.useState(now.getFullYear());
+  const dateArray = useDateArray(currentMonth, currentYear);
 
   return (
     <div className="App">
-      <div>
-        <input value={text} onChange={(e) => setText(e.target.value)} />
-        <button type="button" onClick={() => copyToClipboard(text)}>
-          copy text
-        </button>
-
-        {error && <p>Unable to copy value: {error}</p>}
-        {value && <p>Copied </p>}
-      </div>
+      {dateArray.map((date, index) => (
+        <div>{date}</div>
+      ))}
     </div>
   );
 }
