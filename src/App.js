@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useDateArray from "./hooks/useDateArray";
 import "./styles.css";
 
@@ -9,9 +9,9 @@ export default function App() {
   const dateArray = useDateArray(currentMonth, currentYear);
 
   return (
-    <div className="App">
+    <div className='App'>
       {dateArray.map((date, index) => (
-        <div>{date}</div>
+        <div key={`${date}-${index}`}>{date}</div>
       ))}
     </div>
   );
