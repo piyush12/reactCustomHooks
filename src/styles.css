@@ -9,7 +9,7 @@ body {
   text-align: center;
   background-color: var(--bg-color);
   color: var(--text-color);
-  font-size: 1.33rem;
+  font-size: 2.33rem;
   min-height: 100vh;
   display: flex;
   margin: 0;
@@ -25,16 +25,7 @@ a {
   color: #ff79c6;
 }
 
-button,
-textarea,
-input {
-  background: var(--button-color);
-  outline: none;
-  border: 1px solid var(--bg-color);
-  color: var(--text-color);
-  height: 26px;
-}
-
-pre {
-  text-align: left;
+button{
+  padding: 4px;
+  cursor: pointer;
 }

@@ -237,7 +237,7 @@ const { position, getLocation } = useGeoLocation();
 ## helpful to build calendar or datepicker
 
 ```
-const now = new Date();
+  const now = new Date();
   const [currentMonth, setCurrentMonth] = React.useState(now.getMonth());
   const [currentYear, setCurrentYear] = React.useState(now.getFullYear());
   const dateArray = useDateArray(currentMonth, currentYear);
@@ -247,6 +247,29 @@ const now = new Date();
       {dateArray.map((date, index) => (
         <div>{date}</div>
       ))}
+    </div>
+  );
+
+```
+
+# useHistory
+
+## helpful for undo redo related tasks
+
+```
+
+  const { state, set, undo, redo, canUndo, canRedo } = useHistory(0);
+
+  return (
+    <div className='App'>
+      <button onClick={() => set(state + 1)}>Increment</button>
+      <button style={{ margin: "0 15px" }} onClick={undo} disabled={!canUndo}>
+        Undo
+      </button>
+      <button disabled={!canRedo} onClick={redo}>
+        Redo
+      </button>
+      <h2>{state}</h2>
     </div>
   );
 

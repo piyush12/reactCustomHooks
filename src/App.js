@@ -1,18 +1,20 @@
-import React, { useEffect } from "react";
-import useDateArray from "./hooks/useDateArray";
+import React, { useEffect, useState } from "react";
+import useHistory from "./hooks/useHistory";
 import "./styles.css";
 
 export default function App() {
-  const now = new Date();
-  const [currentMonth, setCurrentMonth] = React.useState(now.getMonth());
-  const [currentYear, setCurrentYear] = React.useState(now.getFullYear());
-  const dateArray = useDateArray(currentMonth, currentYear);
+  const { state, set, undo, redo, canUndo, canRedo } = useHistory(0);
 
   return (
     <div className='App'>
-      {dateArray.map((date, index) => (
-        <div key={`${date}-${index}`}>{date}</div>
-      ))}
+      <button onClick={() => set(state + 1)}>Increment</button>
+      <button style={{ margin: "0 15px" }} onClick={undo} disabled={!canUndo}>
+        Undo
+      </button>
+      <button disabled={!canRedo} onClick={redo}>
+        Redo
+      </button>
+      <h2>{state}</h2>
     </div>
   );
 }
