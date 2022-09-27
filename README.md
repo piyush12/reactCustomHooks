@@ -258,7 +258,7 @@ const { position, getLocation } = useGeoLocation();
 
 ```
 
-  const { state, set, undo, redo, canUndo, canRedo } = useHistory(0);
+  const { state, set, undo, redo, canUndo, canRedo, clear } = useHistory(0);
 
   return (
     <div className='App'>
@@ -269,6 +269,7 @@ const { position, getLocation } = useGeoLocation();
       <button disabled={!canRedo} onClick={redo}>
         Redo
       </button>
+      <button onClick={clear}>Clear</button>
       <h2>{state}</h2>
     </div>
   );
