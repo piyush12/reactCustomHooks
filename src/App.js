@@ -3,7 +3,7 @@ import useHistory from "./hooks/useHistory";
 import "./styles.css";
 
 export default function App() {
-  const { state, set, undo, redo, canUndo, canRedo } = useHistory(0);
+  const { state, set, undo, redo, canUndo, canRedo, clear } = useHistory(0);
 
   return (
     <div className='App'>
@@ -14,6 +14,7 @@ export default function App() {
       <button disabled={!canRedo} onClick={redo}>
         Redo
       </button>
+      <button onClick={clear}>Clear</button>
       <h2>{state}</h2>
     </div>
   );

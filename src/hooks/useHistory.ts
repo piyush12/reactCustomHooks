@@ -10,6 +10,7 @@ enum ActionType {
   Undo = "undo",
   Redo = "redo",
   Set = "set",
+  Clear = "clear",
 }
 
 interface State<T> {
@@ -28,6 +29,7 @@ interface HistoryReturn<T> {
   set: (value: T) => void;
   undo: () => void;
   redo: () => void;
+  clear: () => void;
   canUndo: boolean;
   canRedo: boolean;
 }
@@ -53,6 +55,12 @@ const reducer = <T>(state: State<T>, action: Action<T>) => {
         past: [...past, present],
         present: future[0],
         future: future.slice(1),
+      };
+    case ActionType.Clear:
+      return {
+        past: [],
+        present: action.value,
+        future: [],
       };
   }
 };
@@ -85,6 +93,10 @@ const useHistory = <T>(initialPresentState: T): HistoryReturn<T> => {
     }
   }, [canRedo]);
 
+  const clear = useCallback(() => {
+    dispatch({ type: ActionType.Clear, value: initialPresentState });
+  }, [initialPresentState, dispatch]);
+
   return {
     state: state.present,
     set,
@@ -92,6 +104,7 @@ const useHistory = <T>(initialPresentState: T): HistoryReturn<T> => {
     redo,
     canUndo,
     canRedo,
+    clear,
   };
 };
 
