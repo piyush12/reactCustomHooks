@@ -1,0 +1,15 @@
+import { Canvas, Meta, Story } from "@storybook/addon-docs";
+import { Demo } from "./demo.stories";
+
+<Meta title='Side-effect/useAsync' component={Demo} />
+
+export const Template = (args) => <Demo {...args} />;
+
+# useAsync
+
+
+#### Example
+
+<Canvas>
+  <Story story={Demo} name="useAsync" />
+</Canvas>
