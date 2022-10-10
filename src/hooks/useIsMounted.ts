@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-function useIsMounted() {
+function useIsMounted(): boolean {
   const mounted = useRef(false);
 
   useEffect(() => {

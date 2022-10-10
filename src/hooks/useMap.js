@@ -23,7 +23,7 @@ export function useMap(initialValues) {
         copy.delete(key);
         return copy;
       });
-    }, [])
+    }, []),
   };
 
   return [map, actions];

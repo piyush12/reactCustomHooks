@@ -3,7 +3,7 @@ import useClickOutside from "../../hooks/useClickOutside";
 
 export function Demo() {
   const [open, setOpen] = useState(false);
-  const ref = useRef<null>(null);
+  const ref = useRef(null);
 
   useClickOutside(ref, () => setOpen(false));
 

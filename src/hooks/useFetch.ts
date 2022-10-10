@@ -1,15 +1,26 @@
 import { useEffect } from "react";
 import useAsync from "./useAsync";
 
+interface Options {
+  method: "GET" | "POST" | "PUT" | "DELETE";
+  headers: HeadersInit;
+}
+
+interface FetchReturn {
+  status: string;
+  data: unknown;
+  error: unknown;
+}
+
 function useFetch(
-  url,
-  options = {
+  url: string,
+  options: Options = {
     method: "GET",
     headers: {
-      "Content-Type": "application/json"
-    }
+      "Content-Type": "application/json",
+    },
   }
-) {
+): FetchReturn {
   const { run, status, error, data } = useAsync();
 
   const fetchData = async () => {
@@ -33,7 +44,7 @@ function useFetch(
   return {
     status,
     data,
-    error
+    error,
   };
 }
 
