@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 
 function useClickOutside(ref, handler) {
+
   useEffect(() => {
     const clickHandler = (event) => {
       if (!ref.current || ref.current.contains(event.target)) {

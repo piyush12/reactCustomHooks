@@ -3,13 +3,16 @@ import { Demo } from "./demo.stories";
 
 <Meta title='Side-effect/useAsync' component={Demo} />
 
-export const Template = (args) => <Demo {...args} />;
-
 # useAsync
 
+Handling async request.
+
+- run function to call the async function
+- status will return pending, success or error
+- data will return the value returning from async function
 
 #### Example
 
 <Canvas>
-  <Story story={Demo} name="useAsync" />
+  <Story story={Demo} name='useAsync' />
 </Canvas>

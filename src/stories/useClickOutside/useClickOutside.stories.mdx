@@ -1,0 +1,19 @@
+import { Canvas, Meta, Story } from "@storybook/addon-docs";
+import { Demo } from "./demo.stories";
+
+<Meta title='Side-effect/useClickOutside' component={Demo} />
+
+# useClickOutside
+
+Handle callbacks when user will click outside the target element.
+
+- **ref** target html element
+- **callback** Callback that will trigger when user click outside.
+
+
+
+#### Example
+
+<Canvas>
+  <Story story={Demo} name='useClickOutside' />
+</Canvas>
